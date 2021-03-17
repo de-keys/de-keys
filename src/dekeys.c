@@ -5,8 +5,6 @@
 const char g_szClassName[] = "myWindowClass";
 
 bool mousedown = false;
-POINT lastLocation;
-
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -22,30 +20,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
             return DefWindowProc(hwnd, msg, wParam, lParam);
 
         case WM_LBUTTONDOWN: {
-            printf("a");
             mousedown = true;
-            GetCursorPos(&lastLocation);
-            RECT rect;
-            GetWindowRect(hwnd, &rect);
-            lastLocation.x = lastLocation.x - rect.left;
-            lastLocation.y = lastLocation.y - rect.top;
             break;
         }
         case WM_LBUTTONUP: {
-            printf("b");
             mousedown = false;
             break;
         }
         case WM_MOUSEMOVE: {
-            printf("c");
             if (mousedown) {
-                printf("THE MOUSE IS DOWN!!!!!!!!!!!!!");
                 POINT currentpos;
                 GetCursorPos(&currentpos);
-                int x =  currentpos.x - lastLocation.x;
-                int y =  currentpos.y - lastLocation.y;
-                MoveWindow(hwnd, x, y, 50, 50, false);
-                lastLocation = currentpos;
+                int x =  currentpos.x;
+                int y =  currentpos.y;
+                MoveWindow(hwnd, x, y, 500, 0, false);
+            } else {
+                mousedown = false;
             }
             break;
         }
