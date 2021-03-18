@@ -18,9 +18,10 @@ If you wish to make a contribution to the project then fork the repo and make a 
 - [x] Make it draggable
 - [x] Use Hooks to stop glitches.
 - [ ] Make the window not be draggable from everywhere on the screen.
-- [ ] Add dark theme
+- [ ] Add dark background
+- [ ] Add dark style to buttons
 - [x] Add a button
-- [ ] Add working close button
+- [x] Add working close button
 - [ ] Add the accent buttons
 - [ ] Make inserting characters work
 - [ ] Add a language select dropdown
