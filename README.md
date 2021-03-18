@@ -16,9 +16,15 @@ If you wish to make a contribution to the project then fork the repo and make a 
 - [x] Create the window
 - [x] Remove the titlebar
 - [x] Make it draggable
+- [x] Use Hooks to stop glitches.
+- [ ] Make the window not be draggable from everywhere on the screen.
 - [ ] Add dark theme
-- [ ] Add buttons
+- [x] Add a button
+- [ ] Add working close button
+- [ ] Add the accent buttons
 - [ ] Make inserting characters work
+- [ ] Add a language select dropdown
+- [ ] Change buttons based on language
 - [ ] Have a `github.io` webpage for documentation and installation.
 
 Thank.
