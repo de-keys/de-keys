@@ -61,6 +61,14 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 				hWnd, (HMENU) 6,
 				hInst, NULL );
 
+	static HWND closeButton;
+	closeButton = CreateWindow( "button", "X",
+				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+				winSizeX-40, 0, 
+				40, 40,
+				hWnd, (HMENU) 6,
+				hInst, NULL );
+
 	printf("Made those buttons!!");
 }
 
