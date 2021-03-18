@@ -59,9 +59,9 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw
 
 	static HWND title;
-	title = CreateWindow( "static", "de-keys",
-				WS_CHILD | WS_VISIBLE | BS_TEXT | SS_CENTER | DS_SETFONT,
-				0, 0, 
+	title = CreateWindow( "button", "de-keys",
+				WS_CHILD | WS_VISIBLE | BS_TEXT | BS_CENTER,
+				0, 0,
 				80, 40,
 				hWnd, (HMENU) 0,
 				hInst, NULL );
@@ -69,7 +69,7 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 	static HWND hButton;
 	hButton = CreateWindow( "button", "Label",
 				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-				80, 0, 
+				80, 0,
 				80, 40,
 				hWnd, (HMENU) 5,
 				hInst, NULL );
@@ -77,7 +77,7 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 	static HWND closeButton;
 	closeButton = CreateWindow( "button", "X",
 				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-				winSizeX-40, 0, 
+				winSizeX-40, 0,
 				40, 40,
 				hWnd, (HMENU) 99,
 				hInst, NULL );
@@ -100,7 +100,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				break;
 			case 5:
 				MessageBox(NULL, TEXT("Label button pressed!"), TEXT("Title"), 0);
-			
+
 			default:
 				break;
 			}
@@ -177,7 +177,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
 
-	
+
 	// Add a mouse hook
 	HOOKPROC mouseLL = &LowLevelMouseProc;
 	HHOOK mouseLLHook;
