@@ -3,11 +3,15 @@
 #include <stdio.h>
 
 HWND hwndMain;
+HINSTANCE hinstMain;
 const char g_szClassName[] = "myWindowClass";
 
 bool mousedown = false;
 
 POINT lastPos;
+
+int winSizeX = 500;
+int winSizeY = 0;
 
 // lessen sie die docs: https://docs.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
 LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
@@ -34,7 +38,7 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 			RECT rc;
 			GetWindowRect(hwndMain,&rc);
 
-			MoveWindow(hwndMain, rc.left + x,rc.top + y, 500, 0, false);
+			MoveWindow(hwndMain, rc.left + x,rc.top + y, winSizeX, winSizeY, false);
 
 			lastPos = currentpos;
 		}
@@ -42,9 +46,22 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 	default:
 		break;
 	}
-	printf("tap");
 
 	return CallNextHookEx(NULL, nCode, wParam, lParam);
+}
+
+void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
+	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw
+
+	static HWND hButton;
+	hButton = CreateWindow( "button", "Label",
+				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
+				0, 0, 
+				50, 40,
+				hWnd, (HMENU) 6,
+				hInst, NULL );
+
+	printf("Made those buttons!!");
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -72,6 +89,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	HWND hwnd;
 	MSG Msg;
 
+	hinstMain = hInstance;
+
 	//Step 1: Registering the Window Class
 	wc.cbSize			= sizeof(WNDCLASSEX);
 	wc.style			= 0;
@@ -94,11 +113,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	}
 
 	hwnd = CreateWindowEx(
-		WS_EX_CLIENTEDGE,
+		WS_EX_TRANSPARENT,
 		g_szClassName,
 		"de-keys",
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 500, 0,
+		CW_USEDEFAULT, CW_USEDEFAULT, winSizeX, winSizeY,
 		NULL, NULL, hInstance, NULL);
 
 	SetWindowLong(hwnd, GWL_STYLE, WS_BORDER );
@@ -109,9 +128,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			MB_ICONEXCLAMATION | MB_OK);
 		return 0;
 	}
+	hwndMain = hwnd;
+	MakeThoseButtons(hInstance, hwndMain);
 
-	SetWindowPos(hwnd,HWND_TOPMOST, 0, 0, 500, 0, SWP_SHOWWINDOW);
+	SetWindowPos(hwnd,HWND_TOPMOST, 0, 0, winSizeX, winSizeY, SWP_SHOWWINDOW);
+
 	
+
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
 
