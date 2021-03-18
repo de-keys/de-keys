@@ -120,6 +120,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
+	// Hide console (for release)
+	//FreeConsole();
+
 	WNDCLASSEX wc;
 	HWND hwnd;
 	MSG Msg;
