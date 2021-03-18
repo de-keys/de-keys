@@ -60,14 +60,14 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 
 	static HWND title;
 	title = CreateWindow( "button", "de-keys",
-				WS_CHILD | WS_VISIBLE | BS_TEXT | BS_CENTER,
+				WS_CHILD | WS_VISIBLE | BS_TEXT | BS_CENTER | BS_FLAT,
 				0, 0,
 				80, 40,
 				hWnd, (HMENU) 0,
 				hInst, NULL );
 
 	static HWND hButton;
-	hButton = CreateWindow( "button", "Label",
+	hButton = CreateWindow( "button", "About",
 				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
 				80, 0,
 				80, 40,
@@ -82,7 +82,15 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 				hWnd, (HMENU) 99,
 				hInst, NULL );
 
-	printf("Made those buttons!!");
+    // Test button
+    static HWND testButton;
+    testButton = CreateWindow( "button", "ß",
+               WS_CHILD | WS_VISIBLE,
+               200, 0,
+               40, 40,
+               hWnd, (HMENU) 21,
+               hInst, NULL);
+
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -99,7 +107,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				PostMessage(hwndMain,WM_CLOSE,0,0);
 				break;
 			case 5:
-				MessageBox(NULL, TEXT("Label button pressed!"), TEXT("Title"), 0);
+				MessageBox(NULL, TEXT("De-Keys is a free open-source software that allows you to insert characters from any language directly into your text cursor's position at the press of a button created in the C programming language using the win32 api.\n\nIf you wish to contribute then please go to https://github.com/de-keys/de-keys for more information."), TEXT("About De-Keys"), MB_ICONINFORMATION);
 
 			default:
 				break;
@@ -138,7 +146,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	wc.hInstance		= hInstance;
 	wc.hIcon			= LoadIcon(NULL, IDI_APPLICATION);	// TODO: change this to be the Eszett
 	wc.hCursor			= LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
+	wc.hbrBackground	= (HBRUSH)(COLOR_WINDOW+3);
 	wc.lpszMenuName 	= NULL;
 	wc.lpszClassName	= g_szClassName;
 	wc.hIconSm			= LoadIcon(NULL, IDI_APPLICATION);	// TODO: change this to be the Eszett
