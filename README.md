@@ -1,6 +1,4 @@
-# de-keys
-
-The source code for the project.
+# de-keys source code
 
 ## Description
 
@@ -10,11 +8,17 @@ The project is currently in development and not in a state that it could be used
 
 ## Contributing
 
-If you wish to make a contribution to the project then fork the repo and make a pull request. 
+If you wish to make a contribution to the project then fork the repo and make a pull request. If you contribute well we will make you a collaborator.
 
 ## Todos
 
-- [ ] Implement the functionality of the de-keys project
+- [x] Initalise the project
+- [x] Create the window
+- [x] Remove the titlebar
+- [x] Make it draggable
+- [ ] Add dark theme
+- [ ] Add buttons
+- [ ] Make inserting characters work
 - [ ] Have a `github.io` webpage for documentation and installation.
 
 Thank.
