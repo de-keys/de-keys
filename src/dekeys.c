@@ -13,6 +13,21 @@ POINT lastPos;
 const int winSizeX = 900;
 const int winSizeY = 0;
 
+void Drag(){
+	if (mousedown) {
+		POINT currentpos;
+		GetCursorPos(&currentpos);
+		int x = currentpos.x - lastPos.x;
+		int y = currentpos.y - lastPos.y;
+		RECT rc;
+		GetWindowRect(hwndMain,&rc);
+
+		MoveWindow(hwndMain, rc.left + x,rc.top + y, winSizeX, winSizeY, false);
+
+		lastPos = currentpos;
+	}
+}
+
 // lessen sie die docs: https://docs.microsoft.com/en-us/windows/win32/winmsg/lowlevelmouseproc
 LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
@@ -30,18 +45,7 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 	// Handle dragging mouse
 	// TODO: stop dragging if mouse far away from window
 	case WM_MOUSEMOVE:
-		if (mousedown) {
-			POINT currentpos;
-			GetCursorPos(&currentpos);
-			int x = currentpos.x - lastPos.x;
-			int y = currentpos.y - lastPos.y;
-			RECT rc;
-			GetWindowRect(hwndMain,&rc);
-
-			MoveWindow(hwndMain, rc.left + x,rc.top + y, winSizeX, winSizeY, false);
-
-			lastPos = currentpos;
-		}
+		Drag();
 		break;
 	default:
 		break;
@@ -107,16 +111,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			case 99:
 				PostMessage(hwndMain,WM_CLOSE,0,0);
 				break;
+
 			case 5:
 				MessageBox(NULL, TEXT("De-Keys is a free open-source software that allows you to insert characters from any language directly into your text cursor's position at the press of a button created in the C programming language using the win32 api.\n\nIf you wish to contribute then please go to https://github.com/de-keys/de-keys for more information."), TEXT("About De-Keys"), MB_ICONINFORMATION);
 				break;
-			case 32:
-				SetFocus(hwnd-1);
+				
 			default:
 				break;
 			}
 			break;
-
 		case WM_CLOSE:
 			DestroyWindow(hwnd);
 			break;
