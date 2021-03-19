@@ -23,11 +23,6 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 
 	switch (wParam)
 	{
-	// Handle pressing down
-	case WM_LBUTTONDOWN:
-		mousedown = true;
-		GetCursorPos(&lastPos);
-		break;
 	// Handle releasing mouse
 	case WM_LBUTTONUP:
 		mousedown = false;
@@ -98,6 +93,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	hwndMain = hwnd;
 	switch(msg)
 	{
+		// Handle clicking on the window
+		case WM_LBUTTONDOWN:
+			mousedown = true;
+			GetCursorPos(&lastPos);
+			break;
+		
 		// Handle buttons
 		case WM_COMMAND:
 			switch (wParam)
@@ -115,12 +116,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 			break;
+
 		case WM_CLOSE:
 			DestroyWindow(hwnd);
 			break;
+
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
+
 		default:
 			return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
