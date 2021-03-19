@@ -17,13 +17,14 @@ If you wish to make a contribution to the project then fork the repo and make a 
 - [x] Remove the titlebar
 - [x] Make it draggable
 - [x] Use Hooks to stop glitches.
-- [ ] Make the window not be draggable from everywhere on the screen.
-- [ ] Add dark background
+- [x] Make the window not be draggable from everywhere on the screen.
+- [x] Add dark background
 - [ ] Add dark style to buttons
 - [x] Add a button
 - [x] Add working close button
-- [ ] Add the accent buttons
+- [x] Add a test accent button
 - [ ] Make inserting characters work
+- [ ] Add all the accent buttons
 - [ ] Add a language select dropdown
 - [ ] Change buttons based on language
 - [ ] Have a `github.io` webpage for documentation and installation.
