@@ -91,40 +91,11 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw
 
-	static HWND title;
-	title = CreateWindow( "button", "de-keys",
-				WS_CHILD | WS_VISIBLE | BS_TEXT | BS_CENTER | BS_FLAT,
-				0, 0,
-				80, 40,
-				hWnd, (HMENU) 0,
-				hInst, NULL );
-
-	static HWND hButton;
-	hButton = CreateWindow( "button", "About",
-				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-				80, 0,
-				80, 40,
-				hWnd, (HMENU) 5,
-				hInst, NULL );
-
-	static HWND closeButton;
-	closeButton = CreateWindow( "button", U"×",
-				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
-				winSizeX-40, 0,
-				40, 40,
-				hWnd, (HMENU) 99,
-				hInst, NULL );
-
-	// Test button
-	static HWND eszettButton; // ß
-	eszettButton = CreateWindow( "button", U"ß",
-				WS_CHILD | WS_VISIBLE,
-				200, 0,
-				40, 40,
-				hWnd, (HMENU) 21,
-				hInst, NULL);
-
-    MakeNewButton(hInst, hWnd, 240, 40, 40, U"ä", 23);
+    MakeNewButton(hInst, hWnd, 0, 80, 40, "de-keys", 0);
+    MakeNewButton(hInst, hWnd, 80, 80, 40, "About", 5);
+    MakeNewButton(hInst, hWnd, winSizeX-40, 40, 40, U"×", 99);
+    MakeNewButton(hInst, hWnd, 200, 40, 40, U"ß", 21);
+    MakeNewButton(hInst, hWnd, 240, 40, 40, U"ä", 22);
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
