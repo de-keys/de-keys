@@ -1,3 +1,27 @@
+/*
+MIT License
+
+Copyright (c) 2021 de-keys
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include <windows.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -10,9 +34,19 @@ bool mousedown = false;
 
 POINT lastPos;
 
-const int winSizeX = 900;
+const int winSizeX = 700;
 const int winSizeY = 0;
 
+void MakeNewButton(HINSTANCE hInst, HWND hWnd, int xpos, int length, int width, LPCWSTR name, int messageCode) {
+    static HWND newButton;
+
+    newButton = CreateWindow( "button", name,
+				WS_CHILD | WS_VISIBLE,
+				xpos, 0,
+				length, width,
+				hWnd, (HMENU) messageCode,
+				hInst, NULL);
+}
 void Drag(){
 	if (mousedown) {
 		POINT currentpos;
@@ -82,14 +116,15 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 				hInst, NULL );
 
 	// Test button
-	static HWND testButton;
-	testButton = CreateWindow( "button", U"ß",
+	static HWND eszettButton; // ß
+	eszettButton = CreateWindow( "button", U"ß",
 				WS_CHILD | WS_VISIBLE,
 				200, 0,
 				40, 40,
 				hWnd, (HMENU) 21,
 				hInst, NULL);
 
+    MakeNewButton(hInst, hWnd, 240, 40, 40, U"ä", 23);
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -102,7 +137,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			mousedown = true;
 			GetCursorPos(&lastPos);
 			break;
-		
+
 		// Handle buttons
 		case WM_COMMAND:
 			switch (wParam)
@@ -115,7 +150,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			case 5:
 				MessageBox(NULL, TEXT("De-Keys is free open-source software that allows you to insert characters from any language directly into your text cursor's position at the press of a button. \n\nIt is created using the C programming language and the win32 api.\n\nIf you wish to contribute or get a copy then go to https://github.com/de-keys/de-keys."), TEXT("About De-Keys"), MB_ICONINFORMATION);
 				break;
-				
+
 			default:
 				break;
 			}
