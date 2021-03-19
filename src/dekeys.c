@@ -34,7 +34,7 @@ bool mousedown = false;
 
 POINT lastPos;
 
-const int winSizeX = 700;
+const int winSizeX = 560;
 const int winSizeY = 0;
 
 void MakeNewButton(HINSTANCE hInst, HWND hWnd, int xpos, int length, int width, LPCWSTR name, int messageCode) {
@@ -92,10 +92,18 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexw
 
     MakeNewButton(hInst, hWnd, 0, 80, 40, "de-keys", 0);
-    MakeNewButton(hInst, hWnd, 80, 80, 40, "About", 5);
+    MakeNewButton(hInst, hWnd, 80, 80, 40, "About", 98);
     MakeNewButton(hInst, hWnd, winSizeX-40, 40, 40, U"×", 99);
-    MakeNewButton(hInst, hWnd, 200, 40, 40, U"ß", 21);
-    MakeNewButton(hInst, hWnd, 240, 40, 40, U"ä", 22);
+
+    // Could be a check here with a parameter of "language". Each character has a unique ID.
+
+    MakeNewButton(hInst, hWnd, 200, 40, 40, U"ß", 1);
+    MakeNewButton(hInst, hWnd, 240, 40, 40, U"ä", 2);
+    MakeNewButton(hInst, hWnd, 280, 40, 40, U"Ä", 3);
+    MakeNewButton(hInst, hWnd, 320, 40, 40, U"ö", 4);
+    MakeNewButton(hInst, hWnd, 360, 40, 40, U"Ö", 5);
+    MakeNewButton(hInst, hWnd, 400, 40, 40, U"ü", 6);
+    MakeNewButton(hInst, hWnd, 440, 40, 40, U"Ü", 7);
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -118,10 +126,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				PostMessage(hwndMain,WM_CLOSE,0,0);
 				break;
 
-			case 5:
+			case 98:
 				MessageBox(NULL, TEXT("De-Keys is free open-source software that allows you to insert characters from any language directly into your text cursor's position at the press of a button. \n\nIt is created using the C programming language and the win32 api.\n\nIf you wish to contribute or get a copy then go to https://github.com/de-keys/de-keys."), TEXT("About De-Keys"), MB_ICONINFORMATION);
 				break;
-
 			default:
 				break;
 			}
