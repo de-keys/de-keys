@@ -75,21 +75,21 @@ void MakeThoseButtons(HINSTANCE hInst, HWND hWnd){
 				hInst, NULL );
 
 	static HWND closeButton;
-	closeButton = CreateWindow( "button", "X",
+	closeButton = CreateWindow( "button", U"×",
 				WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON,
 				winSizeX-40, 0,
 				40, 40,
 				hWnd, (HMENU) 99,
 				hInst, NULL );
 
-    // Test button
-    static HWND testButton;
-    testButton = CreateWindow( "button", "�",
-               WS_CHILD | WS_VISIBLE,
-               200, 0,
-               40, 40,
-               hWnd, (HMENU) 21,
-               hInst, NULL);
+	// Test button
+	static HWND testButton;
+	testButton = CreateWindow( "button", U"ß",
+				WS_CHILD | WS_VISIBLE,
+				200, 0,
+				40, 40,
+				hWnd, (HMENU) 21,
+				hInst, NULL);
 
 }
 
@@ -108,9 +108,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				break;
 			case 5:
 				MessageBox(NULL, TEXT("De-Keys is a free open-source software that allows you to insert characters from any language directly into your text cursor's position at the press of a button created in the C programming language using the win32 api.\n\nIf you wish to contribute then please go to https://github.com/de-keys/de-keys for more information."), TEXT("About De-Keys"), MB_ICONINFORMATION);
-                break;
-            case 32:
-                SetFocus(hwnd-1);
+				break;
+			case 32:
+				SetFocus(hwnd-1);
 			default:
 				break;
 			}
