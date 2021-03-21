@@ -40,7 +40,7 @@ void MakeNewButton(HINSTANCE hInst, HWND hWnd, int xpos, int length, int width, 
     static HWND newButton;
 
     newButton = CreateWindow( "button", name,
-				WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_TEXT,
+				WS_CHILD | WS_VISIBLE | BS_TEXT, // | BS_OWNERDRAW, This be for the button styling
 				xpos, 0,
 				length, width,
 				hWnd, (HMENU) messageCode,
