@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
 #include <windows.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -41,11 +40,18 @@ void MakeNewButton(HINSTANCE hInst, HWND hWnd, int xpos, int length, int width, 
     static HWND newButton;
 
     newButton = CreateWindow( "button", name,
-				WS_CHILD | WS_VISIBLE,
+				WS_CHILD | WS_VISIBLE | BS_OWNERDRAW | BS_TEXT,
 				xpos, 0,
 				length, width,
 				hWnd, (HMENU) messageCode,
 				hInst, NULL);
+
+
+
+}
+
+void DrawButton(){
+
 }
 void Drag(){
 	if (mousedown) {
@@ -111,6 +117,34 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	hwndMain = hwnd;
 	switch(msg)
 	{
+    case WM_DRAWITEM:
+        printf("drawing");
+        /* PDRAWITEMSTRUCT Item;
+        Item = (LPDRAWITEMSTRUCT)lParam;
+        SelectObject(Item->hDC, CreateFont(16, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, "Arial Black"));
+        FillRect(Item->hDC, &Item->rcItem, CreateSolidBrush(0));
+        SelectObject(Item->hDC, CreateSolidBrush(0));
+        if (Item->itemState & ODS_SELECTED)
+        {
+            SetTextColor(Item->hDC, 0);
+            SelectObject(Item->hDC, CreateSolidBrush(0xFF00));
+            SelectObject(Item->hDC, CreatePen(PS_SOLID, 2, 0xFF00));
+        }
+        else
+        {
+            SetTextColor(Item->hDC, 0x00FF00);
+            SelectObject(Item->hDC, CreatePen(PS_SOLID, 2, 0x00FF00));
+
+        }
+        SetBkMode(Item->hDC, TRANSPARENT);
+        RoundRect(Item->hDC, Item->rcItem.left, Item->rcItem.top, Item->rcItem.right, Item->rcItem.bottom, 20, 20);
+        int len;
+        len = GetWindowTextLength(Item->hwndItem);
+        LPSTR lpBuff;
+        lpBuff = new char[len+1];
+        GetWindowTextA(Item->hwndItem, lpBuff, len+1);
+        DrawTextA(Item->hDC, lpBuff, len, &Item->rcItem, DT_CENTER); */
+        break;
 		// Handle clicking on the window
 		case WM_LBUTTONDOWN:
 			mousedown = true;
