@@ -82,8 +82,6 @@ LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONUP:
 		mousedown = false;
 		break;
-	// Handle dragging mouse
-	// TODO: stop dragging if mouse far away from window
 	case WM_MOUSEMOVE:
 		Drag();
 		break;
@@ -119,7 +117,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
     case WM_DRAWITEM:
         printf("drawing");
-        /* PDRAWITEMSTRUCT Item;
+        /*PDRAWITEMSTRUCT Item;
         Item = (LPDRAWITEMSTRUCT)lParam;
         SelectObject(Item->hDC, CreateFont(16, 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, "Arial Black"));
         FillRect(Item->hDC, &Item->rcItem, CreateSolidBrush(0));
@@ -137,14 +135,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
         }
         SetBkMode(Item->hDC, TRANSPARENT);
-        RoundRect(Item->hDC, Item->rcItem.left, Item->rcItem.top, Item->rcItem.right, Item->rcItem.bottom, 20, 20);
         int len;
         len = GetWindowTextLength(Item->hwndItem);
         LPSTR lpBuff;
-        lpBuff = new char[len+1];
+        char[len+1] = lpBuff;
         GetWindowTextA(Item->hwndItem, lpBuff, len+1);
-        DrawTextA(Item->hDC, lpBuff, len, &Item->rcItem, DT_CENTER); */
-        break;
+        DrawTextA(Item->hDC, lpBuff, len, &Item->rcItem, DT_CENTER);
+        break; */
 		// Handle clicking on the window
 		case WM_LBUTTONDOWN:
 			mousedown = true;
@@ -191,6 +188,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	HWND hwnd;
 	MSG Msg;
 
+	// LoadIcon(hInstance, "../../../MhmCats.github.io/icon.png", 64, 64, LR_LOADFROMFILE);
 	hinstMain = hInstance;
 
 	// Registering the Window Class
