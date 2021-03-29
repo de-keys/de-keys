@@ -160,6 +160,42 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			case 98:
 				MessageBox(NULL, TEXT("De-Keys is free open-source software that allows you to insert characters from any language directly into your text cursor's position at the press of a button. \n\nIt is created using the C programming language and the win32 api.\n\nIf you wish to contribute or get a copy then go to https://github.com/de-keys/de-keys."), TEXT("About De-Keys"), MB_ICONINFORMATION);
 				break;
+			case 1:
+
+				
+				//https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput
+				printf("tappt");
+				INPUT inputs[2];
+				ZeroMemory(inputs, sizeof(inputs));
+
+				inputs[0].type = INPUT_KEYBOARD;
+				inputs[0].ki.wVk = 0x56;
+
+				inputs[1].type = INPUT_KEYBOARD;
+				inputs[1].ki.wVk = 0x56;
+				inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+
+				
+
+
+				HWND newFocus = FindWindowA("Notepad", "*Untitled - Notepad");
+				if(newFocus){
+					SetActiveWindow(newFocus);
+					SetForegroundWindow(newFocus);
+					SetActiveWindow(newFocus);
+					SetFocus(newFocus);
+
+					printf("set focus on notepad");
+				}else{
+					printf("Notepad no findy...");
+				}
+				UINT uSent = SendInput(2, inputs, sizeof(INPUT));
+				
+				if (uSent != 2)
+				{
+					printf("SendInput failed: 0x%x\n", HRESULT_FROM_WIN32(GetLastError()));
+				}
+				break;
 			default:
 				break;
 			}
